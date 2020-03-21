@@ -1,0 +1,20 @@
+<root xmlns:nd="http://www.example.com/schema/details" xmlns:nr="http://www.example.com/schema/request" xmlns:ns="http://www.example.com/schema/response">
+  <nr:request completionCode="0" customerID="1" />
+  <ns:list total="1">
+    <nd:order CustomerID="1" orderNo="1" status="Shipped">
+      <nd:billToZipCode>0.134364244112</nd:billToZipCode>
+      <nd:shipToZipCode>60000</nd:shipToZipCode>
+      <nd:totals shipping="6.75" subTotal="30.00" tax="1.80" />
+    </nd:order>
+    <nd:order CustomerID="2" orderNo="1" status="Shipped">
+      <nd:billToZipCode>0.847433736937</nd:billToZipCode>
+      <nd:shipToZipCode>60000</nd:shipToZipCode>
+      <nd:totals shipping="6.75" subTotal="30.00" tax="1.80" />
+    </nd:order>
+    <nd:order CustomerID="3" orderNo="1" status="Shipped">
+      <nd:billToZipCode>0.763774618977</nd:billToZipCode>
+      <nd:shipToZipCode>60000</nd:shipToZipCode>
+      <nd:totals shipping="6.75" subTotal="30.00" tax="1.80" />
+    </nd:order>
+  </ns:list>
+</root>
