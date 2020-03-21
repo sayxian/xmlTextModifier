@@ -10,9 +10,16 @@ This code reads the first 20 lines for xml namespace, removes pre-existing ET na
 ### technologies used
 python 2.5
 
+### how to use
+chmod 744 xmlTextModifier.py
+./xmlTextModifier.py <xml> <first node> <second node>
+example:
+./xmlTextModifier.py sample.xml nd:billToZipCode nd:shipToZipCode
+
 ### limitations
 Cannot use later versions of python ==> cannot pip install packages/cannot venv
 (only can use pre-installed packages)
+Assumes namespace is stated in the first 20 lines of the code. This might not be true if namespace is declared further down.
 
 ### problems faced
 1. cannot use/install package ==> cannot use lxml or other xml packages thats makes life easier

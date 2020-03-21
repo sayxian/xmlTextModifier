@@ -28,26 +28,41 @@ def flatten(input):
             new_list.append(j)
     return new_list
 
+def lookupParser(input,namespace_array):
+    if ":" in input:
+        prefix, tag = input.split(':')
+        # python 2 namespace_array.iteritems()
+        for key,value in namespace_array.items():
+            if (prefix==value):
+                return ''.join('.//'+'{'+key+'}'+tag)
+    # input is good; doesn't contain namespace, hence doesn't require transformation
+    else:
+        return input
+
 # Reads the first 20 lines, reads the xmlns attributes
 ns = []
-with open("sample.xml") as f:
+with open(sys.argv[1]) as f:
     for lineIter in range(20):
         xmlstring = f.next()
         ns.append(return_all_match(xmlstring,re.compile(r'xmlns:[a-zA-Z0-9]*=\"[a-zA-Z0-9./:]*\"')))
     ns = set((filter(None,flatten(ns))))
-    # print(ns)
+    # print as python3 method to test namespace generated
+    #  print(ns)
 
-tree = ET.parse('sample.xml')
+tree = ET.parse(sys.argv[1])
 
 # resets ET namespace in case there are other namespace created, which will override the previously created namespace
 ET._namespace_map={}
 for nsIter in ns:
     ET._namespace_map[return_first_match(nsIter,re.compile(r'\"[a-zA-Z0-9./:]*\"'))[1:-1]] = return_first_match(nsIter,r':[a-zA-Z]*=')[1:-1]
-    # print(ET._namespace_map)
+# print(ET._namespace_map)
 
 # implements simple lookup from list of args
-#  to check if there is  ...arg / *argv in python 2.5
-for bid in tree.findall(".//{http://www.example.com/schema/details}billToZipCode"):
-    bid.text=str(random.random())
+
+for sysValues in sys.argv[2:]:
+    print("lookupParser:" + lookupParser(sysValues,ET._namespace_map))
+    for lookupValue in tree.findall(lookupParser(sysValues,ET._namespace_map)):
+        lookupValue.text=str(random.random())
+        print(lookupParser(sysValues,ET._namespace_map))
 
 tree.write('sample1.xml')
