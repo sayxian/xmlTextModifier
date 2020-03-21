@@ -14,4 +14,7 @@ python 2.5
 Cannot use later versions of python ==> cannot pip install packages/cannot venv
 (only can use pre-installed packages)
 
-
+### problems faced
+1. cannot use/install package ==> cannot use lxml or other xml packages thats makes life easier
+2. namespace issue for xml etree is complicated; if namespace is not renamed, all the naming conventions for namespace will be renamed to ns0,ns1
+3. elementree does not return the name for the namespace ( only returns ns0,ns1...)
