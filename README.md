@@ -5,7 +5,7 @@ This allows randomised import of data for import testing.
 However, I decided to generalise it so that it can be applied to other situations.  
 
 ### methodology
-This code reads the first 20 lines for xml namespace, removes pre-existing ET namespace, and uses dictionary to create a new listing.
+This code reads the first 10 lines for xml namespace, removes pre-existing ET namespace, and uses dictionary to create a new listing.
 
 ### technologies used
 python 2.5
@@ -13,16 +13,18 @@ python 2.5
 ### how to use
 Remember to give permission to run exectuable .py  
 chmod 744 xmlTextModifier.py  
-./xmlTextModifier.py <xml> <first node> <second node>  
+./xmlTextModifier.py <xml> <decimal> <pref:tag> <pref:tag>    
 example:  
 ./xmlTextModifier.py sample.xml nd:billToZipCode nd:shipToZipCode  
 
 ### limitations
 Cannot use later versions of python ==> cannot pip install packages/cannot venv  
 (only can use pre-installed packages)  
-Assumes namespace is stated in the first 20 lines of the code. This might not be true if namespace is declared further down.  
+
+Assumes namespace is stated in the first 10 lines of the code. This might not be true if namespace is declared further down.  
 namespace previously in child element would be generated in the root element   
 (which does not matter since xml parsers treat this the same, unless it's some custom made parser or something)
+
 
 ### problems faced
 1. cannot use/install package ==> cannot use lxml or other xml packages thats makes life easier  

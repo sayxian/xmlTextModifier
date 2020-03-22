@@ -1,9 +1,16 @@
 #!/usr/bin/env python
 
+from __future__ import with_statement
 import xml.etree.ElementTree as ET
 import sys
 import random
 import re
+
+'''
+run the program as 
+./xmlTextModifier.py <xml> <decimal> <prefix:tag> <prefix:tag> 
+with multiple prefix and tag depending on what to modify
+'''
 
 random.seed(1)
 
@@ -39,10 +46,10 @@ def lookupParser(input,namespace_array):
     else:
         return input
 
-# Reads the first 20 lines, reads the xmlns attributes
+# Reads the first 10 lines, reads the xmlns attributes
 ns = []
 with open(sys.argv[1]) as f:
-    for lineIter in range(20):
+    for lineIter in range(10):
         xmlstring = f.next()
         ns.append(return_all_match(xmlstring,re.compile(r'xmlns:[a-zA-Z0-9]*=\"[a-zA-Z0-9./:]*\"')))
     ns = set((filter(None,flatten(ns))))
@@ -57,12 +64,12 @@ for nsIter in ns:
     ET._namespace_map[return_first_match(nsIter,re.compile(r'\"[a-zA-Z0-9./:]*\"'))[1:-1]] = return_first_match(nsIter,r':[a-zA-Z]*=')[1:-1]
 # print(ET._namespace_map)
 
-# implements simple lookup from list of args
+# reads decimal
+prec = int(sys.argv[2])
 
-for sysValues in sys.argv[2:]:
-    print("lookupParser:" + lookupParser(sysValues,ET._namespace_map))
+for sysValues in sys.argv[3:]:
     for lookupValue in tree.findall(lookupParser(sysValues,ET._namespace_map)):
-        lookupValue.text=str(random.random())
-        print(lookupParser(sysValues,ET._namespace_map))
+        # modifies decimal using string manipulation
+        lookupValue.text=str(random.random())[:prec+2]
 
 tree.write('sample1.xml')
