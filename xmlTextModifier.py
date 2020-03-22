@@ -1,10 +1,5 @@
 #!/usr/bin/env python
-'''
-runs the code as 
-./xmlTextModifier.py <xmlfile> <decimal places> <prefix:tag> <prefix:tag>
 
-'''
-from __future__ import with_statement
 import xml.etree.ElementTree as ET
 import sys
 import random
@@ -43,6 +38,7 @@ def lookupParser(input,namespace_array):
     # input is good; doesn't contain namespace, hence doesn't require transformation
     else:
         return input
+
 # Reads the first 20 lines, reads the xmlns attributes
 ns = []
 with open(sys.argv[1]) as f:
@@ -63,12 +59,10 @@ for nsIter in ns:
 
 # implements simple lookup from list of args
 
-# sets decimal for file
-prec = int(sys.argv[2])
-
-for sysValues in sys.argv[3:]:
+for sysValues in sys.argv[2:]:
+    print("lookupParser:" + lookupParser(sysValues,ET._namespace_map))
     for lookupValue in tree.findall(lookupParser(sysValues,ET._namespace_map)):
-        # used string manipulation instead of Decimal to convert to decimal places
-        lookupValue.text=str(random.random())[:prec+2]
+        lookupValue.text=str(random.random())
+        print(lookupParser(sysValues,ET._namespace_map))
 
 tree.write('sample1.xml')
