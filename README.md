@@ -13,7 +13,7 @@ python 2.5
 ### how to use
 Remember to give permission to run exectuable .py  
 chmod 744 xmlTextModifier.py  
-./xmlTextModifier.py <xml> <first node> <second node>  
+./xmlTextModifier.py <xml> <decimalplace> <prefix:tag> <prefix:tag>  
 example:  
 ./xmlTextModifier.py sample.xml nd:billToZipCode nd:shipToZipCode  
 
