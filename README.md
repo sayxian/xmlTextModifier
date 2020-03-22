@@ -20,7 +20,11 @@ example:
 ### limitations
 Cannot use later versions of python ==> cannot pip install packages/cannot venv  
 (only can use pre-installed packages)  
+
 Assumes namespace is stated in the first 10 lines of the code. This might not be true if namespace is declared further down.  
+namespace previously in child element would be generated in the root element   
+(which does not matter since xml parsers treat this the same, unless it's some custom made parser or something)
+
 
 ### problems faced
 1. cannot use/install package ==> cannot use lxml or other xml packages thats makes life easier  
